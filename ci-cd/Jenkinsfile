@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Run Network Scan') {
+            steps {
+                sh 'python3 scripts/network_scan.py'
+            }
+        }
+
+        stage('Backup Device Configuration') {
+            steps {
+                sh 'python3 scripts/automate_backup.py'
+            }
+        }
+
+        stage('Deploy Firewall Rules') {
+            steps {
+                sh 'python3 scripts/deploy_firewall.py'
+            }
+        }
+    }
+}
